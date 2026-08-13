@@ -71,7 +71,7 @@ function playGame(){
   playRound();
   if (humanScore > computerScore){
     console.log("You Win the Game!");
-  } else if (humanSscore < computerScore){
+  } else if (humanScore < computerScore){
     console.log("You lose The Game!");
   } else{
     console.log("Draw!");
