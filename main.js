@@ -11,8 +11,7 @@ function getComputerChoice(){
     return "Paper";
   }
 }
-function getHumanChoice(){
-  let y = parseInt(prompt("Enter 1 or 2 or 3 for Rock,Paper,Scissors respectively: "));
+function getHumanChoice(y){
   if (y == 1){
     return "Rock";
   } else if (y==2){
@@ -24,57 +23,65 @@ function getHumanChoice(){
     return;
   }
 }
-function playRound(){
-  let humanChoice = getHumanChoice();
-  console.log(humanChoice);
+function playRound(x){
+  let humanChoice = x;
   let computerChoice = getComputerChoice();
-  console.log(computerChoice);
   if (humanChoice == "Rock"){
     if (computerChoice == "Paper"){
-      console.log("You lost!");
       computerScore = computerScore + 1;
+      div.textContent = `${humanChoice}-${computerChoice} You lost! ${humanScore}-${computerScore}`;
     } else if (computerChoice == "Scissors"){
-      console.log("You Win!");
       humanScore = humanScore + 1;
+      div.textContent = `${humanChoice}-${computerChoice} You Won! ${humanScore}-${computerScore}`;
     } else{
-      return;
+      div.textContent = `${humanChoice}-${computerChoice} Draw! ${humanScore}-${computerScore}`;
     }
   } else if(humanChoice == "Paper"){
     if (computerChoice == "Rock"){
-      console.log("You Won!");
       humanScore = humanScore + 1;
+      div.textContent = `${humanChoice}-${computerChoice} You Won! ${humanScore}-${computerScore}`;
     } else if (computerChoice == "Scissors"){
-      console.log("You lost!");
       computerScore = computerScore +1;
+      div.textContent = `${humanChoice}-${computerChoice} You lost! ${humanScore}-${computerScore}`;
     } else {
-      return;
+    div.textContent = `${humanChoice}-${computerChoice} Draw! ${humanScore}-${computerScore}`;
     }
   } else if(humanChoice == "Scissors"){
     if(computerChoice == "Rock"){
-      console.log("You lose!");
       computerScore = computerScore + 1;
+      div.textContent = `${humanChoice}-${computerChoice} You lost! ${humanScore}-${computerScore}`;
     } else if(computerChoice == "Paper"){
-      console.log("You Win!");
       humanScore = humanScore + 1;
+      div.textContent = `${humanChoice}-${computerChoice} You Won! ${humanScore}-${computerScore}`;
     } else{
-      return;
+      div.textContent = `${humanChoice}-${computerChoice} Draw! ${humanScore}-${computerScore}`;
     }
   }
 }
 let humanScore = 0;
 let computerScore = 0;
 function playGame(){
-  playRound();
-  playRound();
-  playRound();
-  playRound();
-  playRound();
-  if (humanScore > computerScore){
-    console.log("You Win the Game!");
-  } else if (humanScore < computerScore){
-    console.log("You lose The Game!");
-  } else{
-    console.log("Draw!");
+  if (humanScore >= 5 || computerScore >=5){
+    if (humanScore > computerScore){
+      div.textContent = "You Won the Game!";
+    } else{
+      div.textContent = "You Lost the Game!";
+    }
   }
 }
-playGame();
+const div = document.querySelector("div");
+const rockbtn = document.querySelector("#rock");
+rockbtn.addEventListener('click', function(){
+  playRound("Rock");
+  playGame();
+});
+const paperbtn = document.querySelector("#paper");
+paperbtn.onclick = function(){
+  playRound("Paper");
+  playGame();
+};
+const scissorbtn = document.querySelector("#scissors");
+scissorbtn.addEventListener('click', function(){
+  playRound("Scissors");
+  playGame();
+});
